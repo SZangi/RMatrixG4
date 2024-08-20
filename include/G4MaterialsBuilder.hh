@@ -52,6 +52,7 @@ private:
 
   std::vector<G4double> LaBrResponseFunction(std::vector<G4double> eSpectrum, G4double yield);
   std::vector<G4double> EJ309ResponseFunction(std::vector<G4double> eSpectrum, G4double yield, G4String part);
+  std::vector<G4double> EJ301ResponseFunction(std::vector<G4double> eSpectrum, G4double yield, G4String part, std::vector<G4double> pCreated);
   
 private:
   G4Material* newMaterial;

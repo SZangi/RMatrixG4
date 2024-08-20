@@ -1,5 +1,6 @@
 # Ignore the build folder
 /build
 
-# Ignore all output files
+# Ignore all output and processing files
 *.csv
+*.py

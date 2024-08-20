@@ -32,10 +32,18 @@
 #/gps/ene/sigma 5. MeV
 #/gps/ene/mono 1.5 MeV
 #
-#
+# Linear Energy Definition for White Spectrum
+/gps/ene/type Lin
+/gps/ene/gradient 0
+/gps/ene/intercept 1
+# set the energy range
+/gps/ene/min 1 MeV
+/gps/ene/max 5 MeV
+
 ## set the energy definition
-/gps/ene/mono 1.0 MeV
+#/gps/ene/mono 4.0 MeV
+#
 /RMatrix/output/setDataOutput on
-/RMatrix/output/setFileName RMatrixGen1.csv
-/run/beamOn 1000000
+/RMatrix/output/setFileName RMatrixGen3.csv
+/run/beamOn 100000
 #

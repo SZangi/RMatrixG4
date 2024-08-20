@@ -315,6 +315,11 @@ void G4MaterialsBuilder::OpticalMaterials()
   AddElementByAtomCount("C", 435);
   AddElementByAtomCount("H", 543);
   AddOpticalPropertiesByName("EJ309");
+
+  AddMaterial("EJ301", "C398H482", 0.874, 2, false, true);
+  AddElementByAtomCount("C", 398);
+  AddElementByAtomCount("H", 482);
+  AddOpticalPropertiesByName("EJ301");
 }
 
 
@@ -545,6 +550,7 @@ void G4MaterialsBuilder::AddOpticalPropertiesByName(const G4String name)
   
   // Get light reponse functions
   std::vector<G4double> eDeposited = OptVectData[7];
+  std::vector<G4double> pCreated = OptVectData[8];
   std::vector<G4double> eLightResponse = {-1};
   std::vector<G4double> pLightResponse = {-1};
   std::vector<G4double> iLightResponse = {-1};
@@ -557,6 +563,11 @@ void G4MaterialsBuilder::AddOpticalPropertiesByName(const G4String name)
     pLightResponse = EJ309ResponseFunction(eDeposited, scintYield, "proton");
     aLightResponse = EJ309ResponseFunction(eDeposited, scintYield, "alpha");
     iLightResponse = EJ309ResponseFunction(eDeposited, scintYield, "ion");
+  }
+  else if(name == "EJ301"){
+    eLightResponse = EJ301ResponseFunction(eDeposited,scintYield, "electron",pCreated);
+    pLightResponse = EJ301ResponseFunction(eDeposited,scintYield,"proton",pCreated);
+    iLightResponse = EJ301ResponseFunction(eDeposited,scintYield,"ion",pCreated);
   }
   
   std::vector<G4double> LightResponses = {eLightResponse[0],
@@ -630,4 +641,31 @@ std::vector<G4double> G4MaterialsBuilder::EJ309ResponseFunction(std::vector<G4do
   }
 
   return LightResponse;
+}
+
+std::vector<G4double> G4MaterialsBuilder::EJ301ResponseFunction(std::vector<G4double> eSpectrum, G4double yield, G4String part, std::vector<G4double> pCreated)
+{
+  // This value is based off an error in Eljen's reporting of the scintillation yield.
+  // They report the scintilation yield from the data points in Verbinski, in units of
+  // muliples of optical photons created by a gamma from the decay Na-22, but Eljen
+  // misreports the energy of this gamma as 1 MeV instead of 1.274 MeV leading to an
+  // error in scintillation yield/MeV by a factor of 1.28
+  G4double correction = 1.28;
+  std::vector<G4double> LightResponse = {};
+  G4int eSpectrum_Entries = eSpectrum.size();
+  if (part == "electron"){
+    for (G4int i = 0; i< eSpectrum_Entries;i++)
+      LightResponse.push_back(eSpectrum[i] * yield /MeV);
+  }
+  else if (part == "proton"){
+    for (G4int i = 0; i < eSpectrum_Entries; i++)
+      LightResponse.push_back(pCreated[i] * yield /MeV * correction);
+  }
+  else{
+    for (G4int i =0; i < eSpectrum_Entries; i++)
+      LightResponse.push_back((eSpectrum[i] * 0.013 - 0.084 )* yield /MeV);
+  }
+
+  return LightResponse;
+
 }

@@ -1,0 +1,41 @@
+# name: ParticleGun.mac
+# date: 3/20/2024
+# author: Arthur Zangi
+# email: szangi@mit.edu
+#
+#Particle Gun Sources generally have to be defined by the user
+#through the command line interface, so we provide a macro here
+#to initialize it once to some default values which can be changed
+#from the command line later.
+#
+/run/initialize
+#
+/gps/verbose 0
+#
+# 1x1 cm square plane source
+/gps/pos/type Plane
+/gps/pos/shape Square
+/gps/pos/centre 0. 0. -49. cm
+/gps/pos/halfx 0.1 cm
+/gps/pos/halfy 0.1 cm
+#
+#we'll set the momentum direction for now instead of setting a
+#specific angular distribution
+#
+/gps/direction 0. 0. +1.
+#
+# particle definition
+/gps/particle neutron     
+#
+#Gaussian Energy Definition
+#/gps/ene/type Gauss 
+#/gps/ene/sigma 5. MeV
+#/gps/ene/mono 1.5 MeV
+#
+#
+## set the energy definition
+/gps/ene/mono 1.0 MeV
+/RMatrix/output/setDataOutput on
+/RMatrix/output/setFileName RMatrixGen1.csv
+/run/beamOn 1000000
+#

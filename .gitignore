@@ -3,4 +3,8 @@
 
 # Ignore all output and processing files
 *.csv
-*.py
+RMatrixPlotter.py
+*.ipynb
+
+# Ignore Most .mac files
+RMatrixGen1.mac

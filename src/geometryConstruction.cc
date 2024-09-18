@@ -84,7 +84,7 @@ G4VPhysicalVolume *geometryConstruction::Construct()
   // MaterialsManager header files.
 
   G4LogicalVolume *block_L = new G4LogicalVolume(block_S,
-						 G4MaterialsManager::GetInstance()->GetOpticalMaterial("EJ309"),
+						 G4MaterialsManager::GetInstance()->GetOpticalMaterial("EJ301"),
 						 "block_L");
   
   G4VPhysicalVolume *block_P = new G4PVPlacement(new G4RotationMatrix(),

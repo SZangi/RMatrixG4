@@ -41,8 +41,13 @@ public:
 
   void SetEnergy(G4double PartEnergy)
   {
-    NeutronEnergy = 0;
-    NeutronEnergy += PartEnergy;
+    if (NeutronEnergy == 0)
+      NeutronEnergy += PartEnergy;
+  }
+
+  G4int GetEnergy()
+  {
+    return NeutronEnergy;
   }
 
   // The following two functions are called from eventActionMessenger

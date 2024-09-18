@@ -363,7 +363,7 @@ std::vector<std::vector<G4double> > EJ301VectorProperties = {
 
     //proton LightOutput
 
-    {1,
+    {0.00007817,
         0.00671,
         0.00886,
         0.01207,
@@ -412,7 +412,4 @@ const std::map<G4String,std::vector<std::vector<G4double> > > G4MaterialsBuilder
     // EJ301
 
     {"EJ301", EJ301VectorProperties}
-
-
-
 };

@@ -648,9 +648,9 @@ std::vector<G4double> G4MaterialsBuilder::EJ301ResponseFunction(std::vector<G4do
   // This value is based off an error in Eljen's reporting of the scintillation yield.
   // They report the scintilation yield from the data points in Verbinski, in units of
   // muliples of optical photons created by a gamma from the decay Na-22, but Eljen
-  // misreports the energy of this gamma as 1 MeV instead of 1.274 MeV leading to an
-  // error in scintillation yield/MeV by a factor of 1.28
-  G4double correction = 1.28;
+  // misreports the energy of this gamma as 1 MeV instead of 1.066 MeV (the compton edge)
+  // leading to an error in scintillation yield/MeV by a factor of 1.066
+  G4double correction = 1.12;
   std::vector<G4double> LightResponse = {};
   G4int eSpectrum_Entries = eSpectrum.size();
   if (part == "electron"){

@@ -31,12 +31,21 @@ public:
   void BeginOfEventAction(const G4Event *);
   void EndOfEventAction(const G4Event *);
   
-  // This is a user-dfined function to add the energy deposited at
-  // each step to a variable that holds total energy deposited per
-  // event.  It is called by "steppingAction.cc" every time there is
-  // energy deposited on a step
+  // This is a user-dfined function to add the number of photons created
+  // to a tally in the event action that is readout at the end of every
+  // event.
   void AddPhotonCreated(G4int Photons)  
   {PhotonsCreated += Photons;
+  };
+
+  void AddDetection(G4double Time)
+  {
+    DetectedTime = Time;
+  };
+
+  void SetPhotonPosition(G4int Pos)
+  {
+    InitialPosition = Pos;
   };
 
   void SetEnergy(G4double PartEnergy)
@@ -62,10 +71,16 @@ public:
   
 private:
   G4int PhotonsCreated;
-  
+
   G4double NeutronEnergy;
 
+  G4int InitialPosition;
+
+  G4double DetectedTime;
+
   G4bool dataOutputSwitch;
+
+  G4bool Optical_Photons;
  
   eventActionMessenger *eventMessenger;
   

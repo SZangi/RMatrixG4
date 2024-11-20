@@ -4,19 +4,21 @@
 # mail: hartwig@psfc.mit.edu
 
 # Create a new scene for graphics
-/vis/scene/create
+#/vis/scene/create
 
 # Create OpenGL scene handler for compatibility with Qt UI
-/vis/open TSG #OGL
+#/vis/open TSG #OGL
 
 # Set an isometric view of the geometry
-/vis/viewer/set/viewpointThetaPhi 50 50 deg
+#/vis/viewer/set/viewpointThetaPhi 50 50 deg
 
 # Plot all accumulated events in a run
 #/vis/scene/endOfEventAction accumulate -1
 
 
 #Plot only neutrons
+#/vis/scene/add/hits
+
 #/vis/filtering/trajectories/create/particleFilter
 #/vis/filtering/trajectories/particleFilter-0/add neutron
 #/vis/filtering/trajectories/particleFilter-0/add proton
@@ -28,3 +30,29 @@
 /gui/addMenu run Run
 /gui/addButton run partGun "/control/execute ParticleGun.mac"
 
+
+# Macro file for exampleB5
+#
+# Set verbosity
+#
+/control/verbose 2
+#
+# Use this open statement to create an OpenGL view:
+/vis/open OGL 600x600-0+0
+#
+# Disable auto refresh and quieten vis messages whilst scene and
+# trajectories are established:
+/vis/viewer/set/autoRefresh false
+/vis/verbose errors
+#
+# Draw geometry:
+/vis/drawVolume
+# Draw smooth trajectories at end of event, showing trajectory points
+# as markers 2 pixels wide:
+#/vis/scene/add/trajectories smooth
+#/vis/modeling/trajectories/create/drawByCharge
+#/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
+#/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 2
+# Set visualization to accumulate events into one picture
+#
+#/vis/scene/endOfEventAction accumulate

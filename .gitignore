@@ -4,7 +4,11 @@
 # Ignore all output and processing files
 *.csv
 RMatrixPlotter.py
+TrevisoUnfolding.*
 *.ipynb
+*.dat
+*.pdf
+*.png
 
 # Ignore Most .mac files
 RMatrixGen1.mac

@@ -29,13 +29,14 @@ PGA::PGA()
   G4ParticleDefinition* alpha = particleTable -> FindParticle("alpha");
   G4ParticleDefinition* helium3 = particleTable -> FindParticle("He3");
   G4ParticleDefinition* neutron = particleTable -> FindParticle("neutron");
+  G4ParticleDefinition* optical_photon = particleTable ->FindParticle("opticalphoton");
   
   // Initialize the particle gun with some default values
-  particleSource -> SetParticleDefinition(alpha);
+  particleSource -> SetParticleDefinition(optical_photon);
 
   G4double X = 0.*m;
   G4double Y = 0.*m;
-  G4double Z = 13.*cm;
+  G4double Z = -15.*cm;
   // Again, particle position can be set in the class definition like so, but
   // we set it from a macro for more flexibility.
   particleSource -> SetParticlePosition(G4ThreeVector(X,Y,Z));

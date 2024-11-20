@@ -15,6 +15,7 @@ public:
   
 private:
     eventAction *evtAction;
+    G4bool OpticalPhotons;
 };
 
 #endif

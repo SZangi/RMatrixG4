@@ -7,7 +7,14 @@
 
 #include "eventAction.hh"
 #include "eventActionMessenger.hh"
+#include "runAction.hh"
+
 #include "G4RunManager.hh"
+#include "G4AnalysisManager.hh"
+
+#include <iostream>
+
+class runAction;
 
 eventAction::eventAction()
 {
@@ -19,6 +26,8 @@ eventAction::eventAction()
 
   // This is a boolean 'on' or 'off' switch to control data ouput
   dataOutputSwitch = false;
+
+  Optical_Photons = true;
 }
 
 
@@ -37,16 +46,31 @@ void eventAction::BeginOfEventAction(const G4Event *)
   // generated at the beginning of each event
   PhotonsCreated = 0.;
   NeutronEnergy = 0.;
+
+  InitialPosition = 0;
+  DetectedTime = -1.;
 }
 
 // Anything included in this function is performed at the very end of
 // each event's lifetime.
 void eventAction::EndOfEventAction(const G4Event *)
 {
+  if (Optical_Photons){
+    auto analysisManager = G4AnalysisManager::Instance();
+
+    if(DetectedTime > 0)
+      //G4cout<<InitialPosition<<G4endl;
+      analysisManager->FillH2(0, InitialPosition+1, DetectedTime);
+    
+    //G4cout<<"end of event"<<G4endl;
+  }
+
   // If the user has turned data output 'on', and photons were created then do this!
-  if(dataOutputSwitch and (PhotonsCreated > 0))
-    {
-      eventOutput << NeutronEnergy << ";" << PhotonsCreated << std::endl;
-    }
+  if(not Optical_Photons){
+    if(dataOutputSwitch and (PhotonsCreated > 0))
+      {
+        eventOutput << NeutronEnergy << ";" << PhotonsCreated << std::endl;
+      }
+  }
     
 }

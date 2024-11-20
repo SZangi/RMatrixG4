@@ -2,6 +2,7 @@
 #include "G4ParticleTypes.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4VProcess.hh"
+#include "G4TouchableHistory.hh"
 
 #include "stackingAction.hh"
 #include "eventAction.hh"
@@ -10,7 +11,7 @@
 
 stackingAction::stackingAction(eventAction *currentEvent)
     : evtAction(currentEvent)
-{;}
+{OpticalPhotons = true;}
 
 
 stackingAction::~stackingAction()
@@ -39,6 +40,11 @@ G4ClassificationOfNewTrack stackingAction::ClassifyNewTrack(const G4Track* curre
   // Set this flag to drastically improve CPU when using optical
   // physics, provided the spectra from photon creation is sufficient
   G4bool killOpticalPhotons = true;
+
+  if(OpticalPhotons)
+    {
+      killOpticalPhotons = false;
+    }
 
   // Set this flag to kill gammas in order to mimick
   // post-processing of experimental data using PSD.

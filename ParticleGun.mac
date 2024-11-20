@@ -12,38 +12,31 @@
 #
 /gps/verbose 0
 #
-# 1x1 cm square plane source
-/gps/pos/type Plane
-/gps/pos/shape Square
-/gps/pos/centre 0. 0. -49. cm
-/gps/pos/halfx 0.1 cm
-/gps/pos/halfy 0.1 cm
+# Cylindrical particle source matching the shape of the detector
+/gps/pos/type Volume
+/gps/pos/shape Cylinder
+/gps/pos/centre 0. 0. -10. cm
+/gps/pos/radius 2.54 cm
+/gps/pos/halfz 2.5 cm
+#/gps/position 1.0 0.0 -8.0 cm
+/gps/ang/type iso
+
 #
-#we'll set the momentum direction for now instead of setting a
-#specific angular distribution
+# leave the angular distribution isotropic
 #
-/gps/direction 0. 0. +1.
 #
 # particle definition
-/gps/particle neutron     
+/gps/particle opticalphoton     
 #
-#Gaussian Energy Definition
-#/gps/ene/type Gauss 
-#/gps/ene/sigma 5. MeV
-#/gps/ene/mono 1.5 MeV
 #
-# Linear Energy Definition for White Spectrum
-/gps/ene/type Lin
-/gps/ene/gradient 0
-/gps/ene/intercept 1
-# set the energy range
-/gps/ene/min 1 MeV
-/gps/ene/max 5 MeV
 
 ## set the energy definition
-#/gps/ene/mono 4.0 MeV
+/gps/ene/mono 2.36 eV
 #
 /RMatrix/output/setDataOutput on
-/RMatrix/output/setFileName RMatrixGen3.csv
-/run/beamOn 100000
+/RMatrix/output/setFileName EJ301_OpticalPhotonTransport.csv
+/run/beamOn 50
+
+/vis/open TSG
+/vis/plot h2 0
 #

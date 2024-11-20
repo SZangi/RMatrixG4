@@ -19,6 +19,8 @@ public:
   void BeginOfRunAction(const G4Run*) override;
   void EndOfRunAction(const G4Run*) override;
 
+  G4bool OpticalPhotons;
+
 };
 
 #endif

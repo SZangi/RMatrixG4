@@ -8,3 +8,12 @@ RMatrixPlotter.py
 
 # Ignore Most .mac files
 RMatrixGen1.mac
+
+#Ignore Unfolded Spectra
+/UnfoldedSpectra
+
+#Ignore pngs and pdfs
+*.png
+*.pdf
+*.dat
+*.py

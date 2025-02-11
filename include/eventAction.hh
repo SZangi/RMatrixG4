@@ -89,6 +89,8 @@ private:
   std::ofstream processOutput;
 
   std::ofstream detectOutput;
+
+  G4int EventStartTime;
 };
     
 #endif

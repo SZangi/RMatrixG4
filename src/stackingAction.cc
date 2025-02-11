@@ -22,7 +22,7 @@ G4ClassificationOfNewTrack stackingAction::ClassifyNewTrack(const G4Track* curre
 {
   // Get particle definiton
   G4ParticleDefinition *PDef = currentTrack->GetDefinition();
-
+  //currentTrack->SetKineticEnergy();
     // Add count to tally of photons created
   if(PDef == G4OpticalPhoton::OpticalPhotonDefinition())
     evtAction->AddPhotonCreated(1);

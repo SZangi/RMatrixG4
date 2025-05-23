@@ -12,6 +12,9 @@ RMatrixGen1.mac
 #Ignore Unfolded Spectra
 /UnfoldedSpectra
 
+/Old_Outputs
+
+/TestOutputs
 #Ignore pngs and pdfs
 *.png
 *.pdf

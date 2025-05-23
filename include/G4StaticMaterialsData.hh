@@ -252,7 +252,7 @@ std::vector<G4double> EJ301ConstProperties = {
     // Time Const 2
     32.3*ns,
     // Time Const 3
-    270.*ns,
+    32.3*ns,
     // yield /MeV
     12000.,
     // R-scale or Gaussian Broadening

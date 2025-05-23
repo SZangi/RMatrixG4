@@ -20,6 +20,7 @@ public:
   
 private:
   G4GeneralParticleSource* particleSource;
+  G4RandExponential* parTimeGen;
 };
 
 #endif

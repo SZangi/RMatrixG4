@@ -39,16 +39,33 @@ public:
   {PhotonsCreated += Photons;
   };
 
+  void AddTailPhoton(G4int Photons)
+  {
+    TailPhotons+= Photons;
+  };
+
   void SetEnergy(G4double PartEnergy)
   {
     if (NeutronEnergy == 0)
       NeutronEnergy += PartEnergy;
-  }
+  };
 
   G4int GetEnergy()
   {
     return NeutronEnergy;
-  }
+  };
+
+  void SetStartTime(G4double StartTime){
+      EventStartTime = StartTime;
+  };
+
+  G4double GetStartTime(){
+    return EventStartTime;
+  };
+
+  void AddPhotonTime(G4double Time){
+    PhotonTimes.push_back(Time);
+  };
 
   // The following two functions are called from eventActionMessenger
   // at runtime when the user desires to change something....
@@ -59,9 +76,19 @@ public:
   void SetOutputFileName(G4String fName)
   {if(eventOutput.is_open()) eventOutput.close();
     eventOutput.open(fName,std::ofstream::trunc);};
+
+  G4bool GetDataOutput(){
+    return dataOutputSwitch;
+  }
   
 private:
-  G4int PhotonsCreated;
+  G4double PhotonsCreated;
+
+  G4double TailPhotons;
+
+  G4double TotPhotons;
+
+  G4double EventStartTime;
   
   G4double NeutronEnergy;
 
@@ -74,6 +101,8 @@ private:
   std::ofstream processOutput;
 
   std::ofstream detectOutput;
+
+  std::vector<G4double> PhotonTimes;
 };
     
 #endif

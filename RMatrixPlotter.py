@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import cm
 
-df = pandas.read_csv("RMatrixGen3.csv",delimiter=";",names=["Energy","Photons"])
+df = pandas.read_csv("RMatrixes/RMatrixDataSmall.csv",delimiter=";",names=["Energy","Photons"])
 photons = df["Photons"]
 photons.hist(bins=100,range=[400,20000])
 photon_energy = photons / 12.3

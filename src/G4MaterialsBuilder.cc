@@ -523,7 +523,7 @@ void G4MaterialsBuilder::AddOpticalPropertiesByName(const G4String name)
   std::reverse(rIndexSpectrum.begin(), rIndexSpectrum.end());
   std::reverse(rIndex.begin(), rIndex.end());
 
-  if (name == "EJ309"){
+  if (name == "EJ309" or name == "EJ301"){
     // EJ309 rIndex data is already in energy, and so shouldn't be reversed
     rIndexSpectrum = rIndexWavelength;
     rIndex = OptVectData[2];
@@ -663,7 +663,7 @@ std::vector<G4double> G4MaterialsBuilder::EJ301ResponseFunction(std::vector<G4do
   }
   else{
     for (G4int i =0; i < eSpectrum_Entries; i++)
-      LightResponse.push_back((eSpectrum[i] * 0.013 - 0.084 )* yield /MeV);
+      LightResponse.push_back((pCreated[i] * 0.013 )* yield /MeV);
   }
 
   return LightResponse;

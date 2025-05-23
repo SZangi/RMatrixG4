@@ -15,6 +15,8 @@ public:
   
 private:
     eventAction *evtAction;
+    G4double PSDShortGate;
+    G4double PSDLongGate;
 };
 
 #endif

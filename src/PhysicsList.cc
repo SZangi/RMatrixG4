@@ -1,4 +1,5 @@
 #include "PhysicsList.hh"
+#include "G4StepLimiterPhysics.hh"
 
 PhysicsList::PhysicsList() 
 {
@@ -8,6 +9,7 @@ PhysicsList::PhysicsList()
   auto theOpticalParameters = G4OpticalParameters::Instance();
   theOpticalParameters->SetScintByParticleType(true);
   thePhysicsList->RegisterPhysics(theOpticalPhysics);
+  thePhysicsList->RegisterPhysics(new G4StepLimiterPhysics());
 }
 
 

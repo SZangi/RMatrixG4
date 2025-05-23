@@ -10,9 +10,11 @@
 #include "G4SystemOfUnits.hh"
 #include "G4PhysicalConstants.hh"
 #include "G4NistManager.hh"
+#include "G4UserLimits.hh"
 
 #include "geometryConstruction.hh"
-#include "G4MaterialsManager.hh"
+#include "materialsLibrary.hh"
+//#include "G4MaterialsManager.hh"
 
 geometryConstruction::geometryConstruction()
 {;}
@@ -27,7 +29,7 @@ G4VPhysicalVolume *geometryConstruction::Construct()
   // G4MaterialsManager //
   ////////////////////////
 
-  G4MaterialsManager *theMaterialsManager = new G4MaterialsManager;
+  //G4MaterialsManager *theMaterialsManager = new G4MaterialsManager;
   
   ///////////////
   // The World //
@@ -40,7 +42,7 @@ G4VPhysicalVolume *geometryConstruction::Construct()
   G4Box *world_S = new G4Box("world_S",worldX,worldY,worldZ);
 
   G4LogicalVolume *world_L = new G4LogicalVolume(world_S,
-						 G4MaterialsManager::GetInstance()->GetNISTMaterial("G4_AIR"),
+						 G4NistManager::Instance()->FindOrBuildMaterial("G4_AIR"),
 						 "world_L");
   
   G4VPhysicalVolume *world_P = new G4PVPlacement(0, 
@@ -83,9 +85,20 @@ G4VPhysicalVolume *geometryConstruction::Construct()
   // Further documentation on how G4MaterialsManager works can be seen in the
   // MaterialsManager header files.
 
+  //G4Material* ej309 = G4MaterialsManager::GetInstance()->GetOpticalMaterial("EJ301");
+//  G4MaterialPropertiesTable* MPT = ej309->GetMaterialPropertiesTable();
+
+//G4MaterialsManager::GetInstance()->GetOpticalMaterial("EJ301")->GetMaterialPropertiesTable()->DumpTable();
+
   G4LogicalVolume *block_L = new G4LogicalVolume(block_S,
-						 G4MaterialsManager::GetInstance()->GetOpticalMaterial("EJ301"),
+            materialsLibrary::EJ301(),
 						 "block_L");
+
+//  auto userLimits = new G4UserLimits(1 * nm);
+//  block_L->SetUserLimits(userLimits);
+
+    materialsLibrary::EJ301()->GetMaterialPropertiesTable()->DumpTable();
+  
   
   G4VPhysicalVolume *block_P = new G4PVPlacement(new G4RotationMatrix(),
 						 G4ThreeVector(0., 0., -10.*cm),

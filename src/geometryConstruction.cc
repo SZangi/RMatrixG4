@@ -215,7 +215,7 @@ G4VPhysicalVolume *geometryConstruction::Construct()
 
   // Attach Sensitive Detector to the PMT volume
 
-  pmt_SD = new ASIMPhotodetectorSD("pmt");
+  auto pmt_SD = new ASIMPhotodetectorSD("pmt");
   pmt_SD->SetHitRGBA(1.0, 1.0, 0.0, 0.5);
   pmt_SD->SetHitSize(8);
   
